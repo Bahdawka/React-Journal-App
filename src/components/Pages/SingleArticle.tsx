@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { getSingleArticle } from '../../utils/api'
 import { Link, useParams } from 'react-router'
 import type { ArticleInterface } from '../../types/Article.interface'
+import { useSortField } from '../../hooks/useSortField'
 
 const SingleArticle = () => {
   const [article, setArticle] = useState<ArticleInterface | null>(null)
@@ -9,6 +10,7 @@ const SingleArticle = () => {
   const [error, setError] = useState<string | null>(null)
 
   const { id } = useParams()
+  const { sortQuery } = useSortField()
 
   useEffect(() => {
     (async () => {
@@ -37,7 +39,7 @@ const SingleArticle = () => {
           <hr />
           <p>{article.body}</p>
           <div className="link-xl">
-            <Link to={'/articles'}>All articles</Link>
+            <Link to={`/articles${sortQuery}`}>All articles</Link>
           </div>
         </>
       )}

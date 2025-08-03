@@ -1,14 +1,21 @@
 import axios from 'axios'
+import { API_URL } from '../constants'
 import type { ArticleInterface } from '../types/Article.interface'
 
-const API_URL = 'https://jsonplaceholder.typicode.com/posts'
 
-export const getArticles = async () => {
+export const getArticles = async (sortField: string | null) => {
   try {
-    const params = {
+    const params: Record<string, number | string> = {
       _start: 0,
-      _limit: 20
+      _limit: 100
     }
+
+    if (sortField) {
+      const sortOrder = sortField.startsWith('-') ? 'desc' : 'asc'
+      params['_sort'] = sortField.startsWith('-') ? sortField.slice(1) : sortField
+      params['_order'] = sortOrder
+    }
+
     const response = await axios.get(API_URL, { params })
     const articles: ArticleInterface[] = response.data.map((article: Partial<ArticleInterface>) => ({
       ...article,
