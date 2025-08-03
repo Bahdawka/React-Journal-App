@@ -1,4 +1,5 @@
-# React Journal App / Додаток React Journal
+# React Journal App [EN below] / Додаток React Journal
+- Deploy on Vercel: https://react-journal-app-cyan.vercel.app/
 
 ## 🇺🇦 Українська версія
 
